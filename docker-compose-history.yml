@@ -1,0 +1,28 @@
+version: '2'
+
+networks:
+  history:
+
+services:
+  grafana:
+    image: grafana/grafana-oss:8.4.7
+    container_name: grafana
+    restart: unless-stopped
+    networks: 
+      - history
+    ports:
+      - "3000:3000"
+    volumes:
+      # sudo mkdir -p /srv/docker/grafana/data; chown 472:472 /srv/docker/grafana/data
+      - grafana_data:/var/lib/grafana
+      
+  influxdb:
+    image: influxdb:1.8.10
+    container_name: influxdb
+    restart: unless-stopped
+    networks: 
+      - history
+    ports:
+      - "8086:8086"
+    volumes:
+      - /var/lib/influxdb:/var/lib/influxdb
