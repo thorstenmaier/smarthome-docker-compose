@@ -24,5 +24,6 @@ services:
       - history
     ports:
       - "8086:8086"
+      - "8088:8088"
     volumes:
       - /var/lib/influxdb:/var/lib/influxdb
